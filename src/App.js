@@ -3,7 +3,7 @@ import axios from 'axios';
 import './App.css';
 import Header from './Header';
 
-const API = 'http://localhost:5000/api/todos';
+const API = 'https://to-do-backend-q9sw.onrender.com/api/todos';
 
 function App() {
   const [todos, setTodos] = useState([]);
@@ -14,7 +14,7 @@ function App() {
 
   // Fetch user info on mount
   useEffect(() => {
-    axios.get('http://localhost:5000/auth/user', { withCredentials: true })
+    axios.get('https://to-do-backend-q9sw.onrender.com/auth/user', { withCredentials: true })
       .then(res => {
         if (res.data && res.data.displayName) {
           setUser(res.data);
@@ -28,9 +28,7 @@ function App() {
   // Fetch todos for logged-in users, or from localStorage for guests
   useEffect(() => {
     if (user) {
-      fetch("http://localhost:5000/api/todos", {
-        credentials: 'include'
-      })
+      fetch("https://to-do-backend-q9sw.onrender.com/api/todos", { credentials: 'include' })
         .then(res => res.json())
         .then(data => setTodos(data));
     } else {

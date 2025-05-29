@@ -4,7 +4,7 @@ import './App.css'; // Make sure the vignette CSS is included here
 
 const Header = ({ user, setUser, darkMode, toggleDarkMode }) => {
   const handleLogout = () => {
-    axios.get('http://localhost:5000/auth/logout', { withCredentials: true })
+    axios.get('https://to-do-backend-q9sw.onrender.com/auth/logout', { withCredentials: true })
       .then(() => {
         setUser(null);
         window.location.reload();
@@ -37,7 +37,7 @@ const Header = ({ user, setUser, darkMode, toggleDarkMode }) => {
         {user ? (
           <button onClick={handleLogout}>Logout</button>
         ) : (
-          <a href="http://localhost:5000/auth/google">
+          <a href="https://to-do-backend-q9sw.onrender.com/auth/google">
             <button>Login with Google</button>
           </a>
         )}
