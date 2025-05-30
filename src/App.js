@@ -17,6 +17,7 @@ function App() {
     axios.get('https://to-do-backend-q9sw.onrender.com/auth/user', { withCredentials: true })
       .then(res => {
         if (res.data && res.data.displayName) {
+          console.log("Hola amigo, kaise ho thik ho?:", res.data);
           setUser(res.data);
         } else {
           setUser(null);
