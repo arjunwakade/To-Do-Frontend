@@ -24,7 +24,10 @@ function App() {
           setUser(null);
         }
       })
-      .catch(() => setUser(null));
+      .catch((err) => {
+        console.log("Error fetching user:", err);
+        setUser(null);
+      });
   }, []);
 
   // Fetch todos for logged-in users, or from localStorage for guests
