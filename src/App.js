@@ -20,6 +20,7 @@ function App() {
           console.log("Hola amigo, kaise ho thik ho?:", res.data);
           setUser(res.data);
         } else {
+          console.log("Very ver saddddd");
           setUser(null);
         }
       })
