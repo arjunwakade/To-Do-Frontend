@@ -1,4 +1,4 @@
-# Cleanup script
+﻿# Cleanup script
 param (
     [string]$namespace = "todo-app"
 )
