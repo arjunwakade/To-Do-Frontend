@@ -5,7 +5,7 @@ on:
     workflows: ["Frontend CI"]
     types:
       - completed
-    branches: [main]
+    branches: [master]
 
 jobs:
   deploy:
