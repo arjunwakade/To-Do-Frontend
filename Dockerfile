@@ -4,14 +4,15 @@ WORKDIR /app
 
 COPY package*.json ./
 
-RUN npm ci
+RUN npm ci --verbose
 
 COPY . .
 
 ENV CI=false
 ENV NODE_ENV=production
+ENV GENERATE_SOURCEMAP=false
 
-RUN npm run build
+RUN npm run build --verbose
 
 FROM nginx:alpine
 

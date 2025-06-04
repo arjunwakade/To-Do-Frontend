@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import axios from 'axios';
-import App from './App';
+import App from './App.js';
 
 // Mock axios
 jest.mock('axios');
