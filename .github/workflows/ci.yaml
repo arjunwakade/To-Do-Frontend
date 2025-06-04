@@ -46,5 +46,5 @@ jobs:
           context: .
           push: true
           tags: |
-            ghcr.io/${{ github.repository }}/frontend:latest
-            ghcr.io/${{ github.repository }}/frontend:${{ github.sha }}
+            ghcr.io/arjunwakade/todo-frontend/frontend:latest
+            ghcr.io/arjunwakade/todo-frontend/frontend:${{ github.sha }}
