@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import './App.css';
-import Header from './Header';
+import Header from './Header.js';
 
 const API = 'https://to-do-backend-q9sw.onrender.com/api/todos';
 
