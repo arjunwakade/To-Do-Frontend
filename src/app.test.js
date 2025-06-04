@@ -5,7 +5,9 @@ import App from './App';
 describe('To-Do App', () => {
   it('renders the app without crashing', () => {
     render(<App />);
-    expect(screen.getByText(/to-do/i)).toBeInTheDocument();
+    // Use a more specific query
+    const headerText = screen.getAllByText(/to-do list/i)[0];
+    expect(headerText).toBeInTheDocument();
   });
 
   it('can add a new todo', () => {
@@ -15,6 +17,4 @@ describe('To-Do App', () => {
     fireEvent.click(screen.getByText(/add/i));
     expect(screen.getByText('Buy milk')).toBeInTheDocument();
   });
-
-  // Add more tests for completing or deleting todos
 });
