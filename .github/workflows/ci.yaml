@@ -34,6 +34,14 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       
+      - id: 'auth'
+        name: 'Authenticate to Google Cloud'
+        uses: 'google-github-actions/auth@v1'
+        with:
+          workload_identity_provider: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: 'github-actions@to-do-462615.iam.gserviceaccount.com'
+          token_format: 'access_token'
+      
       - name: Set up Cloud SDK
         uses: google-github-actions/setup-gcloud@v1
         with:
