@@ -13,3 +13,4 @@ Dockerfile
 .env.test
 .env.production
 *.md
+actions-runner/

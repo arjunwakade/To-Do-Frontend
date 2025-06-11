@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: todo-frontend
-        image: ghcr.io/arjunwakade/to-do-frontend/frontend:latest
+        image: gcr.io/to-do-462615/frontend:latest
         ports:
         - containerPort: 80
         envFrom:
