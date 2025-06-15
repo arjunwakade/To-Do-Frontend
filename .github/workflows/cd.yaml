@@ -9,16 +9,52 @@ on:
 
 jobs:
   deploy:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     
     steps:
       - uses: actions/checkout@v3
       
-      - name: Deploy to local Kubernetes
+      - id: 'auth'
+        name: 'Authenticate to Google Cloud'
+        uses: 'google-github-actions/auth@v1'
+        with:
+          credentials_json: '${{ secrets.GCP_SA_KEY }}'
+      
+      - name: Set up Cloud SDK
+        uses: 'google-github-actions/setup-gcloud@v1'
+        with:
+          project_id: to-do-462615
+          install_components: 'gke-gcloud-auth-plugin'
+      
+      - name: Get GKE Credentials
+        uses: google-github-actions/get-gke-credentials@v1
+        with:
+          cluster_name: to-do-cluster
+          location: us-central1-a
+          project_id: to-do-462615
+      
+      - name: Deploy to GKE
         run: |
+          echo "Deploying configurations..."
           kubectl apply -f kubernetes/frontend-configmap.yaml
+          echo "[SUCCESS] Configmap applied"
+          
+          echo "Applying deployment..."
           kubectl apply -f kubernetes/frontend-deployment.yaml
+          echo "[SUCCESS] Deployment applied"
+          
+          echo "Applying service..."
           kubectl apply -f kubernetes/frontend-service.yaml
-        env:
-          KUBECONFIG: ${{ secrets.KUBECONFIG }}
+          echo "[SUCCESS] Service applied"
+      
+      - name: Verify deployment
+        run: |
+          echo "Waiting for deployment to be available..."
+          kubectl wait --for=condition=available deployment/todo-frontend --timeout=180s
+          
+          echo "Checking pod status..."
+          kubectl get pods -l app=todo-frontend
+          
+          echo "Checking service status..."
+          kubectl get svc todo-frontend
